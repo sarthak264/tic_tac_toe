@@ -1,9 +1,20 @@
 import "./cell.css";
+import classNames from "classnames";
 
-const Cell = () => {
+const Cell = (props) => {
+  const cellClasses = classNames({
+    cell: true,
+    winner: props.highlight == true
+  })
+  
+  const cellContentClasses = classNames({
+    'cell-content': true,
+    populated: props.value
+  })
+
   return (
-    <button className="cell">
-      <span className="cell-content"></span>
+    <button className={cellClasses}>
+      <span className={cellContentClasses}>{props.value}</span>
     </button>
   );
 };
