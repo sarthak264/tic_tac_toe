@@ -1,15 +1,12 @@
 import "./board.css";
 import Cell from "./../cell/Cell";
 
-const Board = () => {
-  const cellValues = ['X','X','X','X','O','X','O','',''];
-  const winningCombination = [0,4,8];
-
+const Board = (props) => {
   return (
     <div id="board">
-      {cellValues.map((item, index) => {
-        const highlight = winningCombination && 
-                          winningCombination.indexOf(index) >= 0;
+      {props.cellValues.map((item, index) => {
+        const highlight = props.winningCombination && 
+                          props.winningCombination.indexOf(index) >= 0;
         return (
           <Cell key={index} value={item} highlight={highlight} />
         )
