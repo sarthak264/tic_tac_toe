@@ -2,17 +2,14 @@ import "./board.css";
 import Cell from "./../cell/Cell";
 
 const Board = () => {
+  const cellValues = ['X','X','X','X','O','X','O','',''];
   return (
     <div id="board">
-      <Cell value="X" highlight={true}/>
-      <Cell value="X" highlight={true}/>
-      <Cell value="X" highlight={true}/>
-      <Cell value="X" highlight={false}/>
-      <Cell value="O" highlight={false}/>
-      <Cell value="X" highlight={false}/>
-      <Cell value="O" highlight={false}/>
-      <Cell value="" highlight={false}/>
-      <Cell value="" highlight={false}/>
+      {cellValues.map((item, index) => {
+        return (
+          <Cell key={index} value={item} highlight={false} />
+        )
+      })}
     </div>
   );
 };
