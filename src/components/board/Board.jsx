@@ -8,7 +8,7 @@ const Board = (props) => {
         const highlight = props.winningCombination && 
                           props.winningCombination.indexOf(index) >= 0;
         return (
-          <Cell key={index} value={item} highlight={highlight} />
+          <Cell key={index} value={item} highlight={highlight} onClick={() => {props.cellClicked(index)}}/>
         )
       })}
     </div>
