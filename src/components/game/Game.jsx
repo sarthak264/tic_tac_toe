@@ -17,6 +17,7 @@ const Game = () => {
     "",
   ]);
   const [mark, setMark] = useState(true);
+  const [isGameOver,setIsGameOver] = useState(false);
 
   // Misc variables
   const winningCombination = [];
@@ -42,7 +43,7 @@ const Game = () => {
           cellClicked={cellClicked}
         />
       </div>
-      <Modal />
+      <Modal isGameOver={isGameOver}/>
     </>
   );
 };
