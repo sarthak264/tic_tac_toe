@@ -4,10 +4,12 @@ import Board from './../board/Board'
 
 const Game = () => {
   const [cellValues,setCellValues] = useState(['','','','','','','','','']);
+  const [mark,setMark] = useState(true)
   const winningCombination = [];
   const cellClicked = (cellIndex) => {
     const newCellValues = [...cellValues];
-    newCellValues[cellIndex] = 'X';
+    newCellValues[cellIndex] = mark?'X':'O';
+    setMark(!mark);
     setCellValues(newCellValues);
     console.log(`cell ${cellIndex} clicked.`);
   }
