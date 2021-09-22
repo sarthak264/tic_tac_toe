@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./game.css";
 import Board from "./../board/Board";
 import Modal from './../modal/Modal';
+import {calculateWinner} from './../../util/calculateWinner'
 
 const Game = () => {
   // useStates
@@ -18,6 +19,7 @@ const Game = () => {
   ]);
   const [mark, setMark] = useState(true);
   const [isGameOver,setIsGameOver] = useState(false);
+  const [turnsLeft, setTurnsLeft] = useState(9);
 
   // Misc variables
   const winningCombination = [];
@@ -26,10 +28,13 @@ const Game = () => {
   const isCellEmpty = (cellIndex) => cellValues[cellIndex] === "";
   const cellClicked = (cellIndex) => {
     if (isCellEmpty(cellIndex)) {
+      setTurnsLeft(turnsLeft-1);
       const newCellValues = [...cellValues];
       newCellValues[cellIndex] = mark ? "X" : "O";
+      const calcResult = calculateWinner(newCellValues,cellIndex,turnsLeft);
       setMark(!mark);
       setCellValues(newCellValues);
+      setIsGameOver(calcResult.hasResult);
     }
   };
 
