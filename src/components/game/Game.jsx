@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./game.css";
 import Board from "./../board/Board";
-import Modal from './../modal/Modal';
-import {calculateWinner} from './../../util/calculateWinner'
+import Modal from "./../modal/Modal";
+import { calculateWinner } from "./../../util/calculateWinner";
 
 const Game = () => {
   // useStates
@@ -18,24 +18,37 @@ const Game = () => {
     "",
   ]);
   const [mark, setMark] = useState(true);
-  const [isGameOver,setIsGameOver] = useState(false);
-  const [turnsLeft, setTurnsLeft] = useState(9);
-
-  // Misc variables
-  const winningCombination = [];
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [turnsLeft, setTurnsLeft] = useState(8);
+  const [winner, setWinner] = useState();
+  const [winningCombination, setWinningCombination] = useState([]);
 
   // Functions
   const isCellEmpty = (cellIndex) => cellValues[cellIndex] === "";
   const cellClicked = (cellIndex) => {
     if (isCellEmpty(cellIndex)) {
-      setTurnsLeft(turnsLeft-1);
       const newCellValues = [...cellValues];
       newCellValues[cellIndex] = mark ? "X" : "O";
-      const calcResult = calculateWinner(newCellValues,cellIndex,turnsLeft);
-      setMark(!mark);
+
+      const newTurns = turnsLeft - 1;
+
+      const calcResult = calculateWinner(newCellValues, cellIndex, turnsLeft);
+
       setCellValues(newCellValues);
+      setMark(!mark);
       setIsGameOver(calcResult.hasResult);
+      setTurnsLeft(newTurns);
+      setWinner(calcResult.winner);
+      setWinningCombination(calcResult.winnerCombination);
     }
+  };
+  const restartGame = () => {
+    setCellValues(["", "", "", "", "", "", "", "", ""]);
+    setMark(true);
+    setIsGameOver(false);
+    setTurnsLeft(8);
+    setWinner(undefined);
+    setWinningCombination([]);
   };
 
   return (
@@ -48,7 +61,7 @@ const Game = () => {
           cellClicked={cellClicked}
         />
       </div>
-      <Modal isGameOver={isGameOver}/>
+      <Modal isGameOver={isGameOver} winner={winner} onClick={restartGame} />
     </>
   );
 };

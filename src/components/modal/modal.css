@@ -9,11 +9,11 @@
   background: var(--modal-overlay-color);
 }
 
-#modal-overlay.modal-open{
-    display: grid;
+#modal-overlay.modal-open {
+  display: grid;
 }
 
-#game-result-modal{
+#game-result-modal {
   display: grid;
   grid-row-gap: 76vmin;
 

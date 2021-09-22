@@ -52,11 +52,11 @@ export const calculateWinner = (cell, index, turnsLeft) => {
       return {
         hasResult: true,
         winner: currentValue,
-        winnerCombination: [currentValue, firstOption, secondOption],
+        winnerCombination: [index, winningRanges[i][0], winningRanges[i][1]],
       };
     }
   }
-  if (turnsLeft == 0) {
+  if (turnsLeft === 0) {
     return {
       hasResult: true,
       winner: undefined,
